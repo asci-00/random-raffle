@@ -3,15 +3,14 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
 import MainView from '@/views/MainView.vue';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
   components: {
     MainView,
   },
-})
-export default class App extends Vue {}
+});
 </script>
 
 <style></style>
