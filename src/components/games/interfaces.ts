@@ -1,13 +1,24 @@
-export interface Player {
-  id: number;
+export interface player {
+  idx: number;
   name: string;
-  state: string;
+  state: number;
+  color: string;
 }
 export interface gameInterface {
   complexity: number;
   number: number;
 }
-export interface drawInterface {
-  xTerm: number;
-  yTerm: number;
+
+export interface playerInterface {
+  marginHorizontal: number;
+  radius: number;
+  horizontalGap: number;
+  count: number;
+}
+
+export interface ladderInterface {
+  marginHorizontal: number;
+  stepCount: number;
+  stepVerticalGap: number;
+  player: playerInterface;
 }

@@ -1,37 +1,37 @@
 <template lang="pug">
 .service-list
   figure.hover-box(
-    v-for="(service, idx) in SERVICE"
-    :class="service.name === modelValue && 'active'"
+    v-for="(service, idx) in services"
+    :class="service.path === selected && 'active'"
     :key="idx"
   )
     img(:src="service.icon" :alt="service.name")
     figcaption
       i {{ service.name }}
-      a(@click="serviceClick(service.name)")
+      a(@click="changeMenu(service.path)")
 
 .service-guide Choice the game
 </template>
 <script lang="ts">
-import { SERVICE } from '@/components/mainView/constants';
-import { defineComponent } from 'vue';
+import { routes } from '@/router';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   name: 'ServiceList',
   props: {
-    modelValue: {
+    selected: {
       type: String,
       required: true,
     },
   },
-  emits: ['update:modelValue', 'change'],
+  emits: ['change'],
   setup(props, { emit }) {
-    const serviceClick = (name: string) => {
-      if (props.modelValue === name) emit('update:modelValue', null);
-      else emit('update:modelValue', name);
-      emit('change');
+    const changeMenu = (path: string) => {
+      if (props.selected === path) return;
+      emit('change', path);
     };
-    return { SERVICE, serviceClick };
+    const services = ref(routes.filter(({ isService }) => isService));
+    return { changeMenu, services };
   },
 });
 </script>
